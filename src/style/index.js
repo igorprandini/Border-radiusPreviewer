@@ -216,15 +216,6 @@ export const AreaSwitch = styled.div`
     }
 `;
 
-export const AreaInputRange = styled.div`
-    width: 100%;
-    padding: 20px 15px;
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-    align-items: center;
-`;
-
 export const AreaInputValues = styled.div`
     width: 100%;
     max-width: 450px;

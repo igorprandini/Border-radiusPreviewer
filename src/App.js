@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Section, ContainerExemple, ObjectExemple, Clipboard, ContainerInputValues, AreaSwitch, Switch, AreaInputValues, AreaInputRange } from './style';
+import { Section, ContainerExemple, ObjectExemple, Clipboard, ContainerInputValues, AreaSwitch, Switch, AreaInputValues } from './style';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css'
 
