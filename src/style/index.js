@@ -7,10 +7,11 @@ export const Global = createGlobalStyle`
         --colorBackgroundDark: #2b2f36;
         --colorFontPrimaryDark: #e3e3e4;
         --colorFontSecundaryDark: #cfd3d8aa;
-        --colorBackgroundInputDark: #29292D;
-        --colorBorderNormalDark: #3F3F41;
-        --colorBorderErrorDark: #FF9494;
-        --colorButtonPrimaryDark: #52008b;
+        --colorBackgroundClipboardDark: #29292D;
+        --colorBorderClipboardDark: #3F3F41;
+        --colorBackgroundExempleDark: #7cb342;
+        --colorCssAttribute: #5A7BFF;
+        --colorCssAttributeValue: #B50DF7;
     }
 
     * {
@@ -45,6 +46,7 @@ export const Section = styled.section`
     width: 100%;
     height: 100%;
     background-color: var(--colorBackgroundDark);
+    padding: 10px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
@@ -52,93 +54,190 @@ export const Section = styled.section`
 
     h1 {
         text-align: center;
-        font-size: 3.9rem;
-        color: var(--colorFontPrimary);
+        font-size: 3.5rem;
+        color: var(--colorFontPrimaryDark);
         font-weight: 300;
         cursor: default;
 
         @media (max-width: 768px) {
-
+            font-size: 2.5rem;
         }
     }
 
     p {
-        font-size: 1.8rem;
-        color: var(--colorFontSilver);
+        font-size: 1.5rem;
+        color: var(--colorFontSecundaryDark);
         font-weight: 200;
         text-align: center;
         cursor: default;
     }
 
     span {
-        font-size: 1.3rem;
-        color: var(--colorFontSilver);
+        font-size: 1.1rem;
+        color: var(--colorFontSecundaryDark);
         font-weight: 300;
         text-align: center;
         cursor: default;
     }
 `;
 
-export const Form = styled.form`
+export const ObjectExemple = styled.div`
+    border-radius: ${props => props.radius};
+`;
+
+export const ContainerExemple = styled.div`
+    width: 161px;
+    height: 160px;
+    margin: 5px 0;
+    border: 2px solid var(--colorBorderClipboardDark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    ${ObjectExemple} {
+        width: 141px;
+        height: 140px;
+        background-color: var(--colorBackgroundExempleDark);
+    }
+`;
+
+export const Clipboard = styled.div`
     width: 100%;
+    max-width: 385px;
     padding: 10px;
+    margin: 5px 0;
+    border: 1.3px solid var(--colorBorderClipboardDark);
+    background-color: var(--colorBackgroundClipboardDark);
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    cursor: text;
+
+    span {
+        font-size: 1rem;
+        font-weight: 200;
+        color: var(--colorCssAttribute);
+        cursor: text;
+
+        label {
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--colorCssAttributeValue);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            font-size: 0.8rem;
+
+            label {
+                font-size: 0.7rem;
+            }
+        }
+    }
+`;
+
+export const Switch = styled.label`
+    width: 50px;
+    height: 24px;
+    margin: 0 10px;
+    display: inline-block;
+`;
+
+export const AreaSwitch = styled.div`
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    span {
+        font-size: ${props => props.fontSize};
+        margin-right: ${props => props.marginRightText};
+        color: var(--colorFontPrimaryDark);
+        cursor: default;
+    }
+
+    ${Switch} {
+        position: relative;
+
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--colorFontSecundaryDark);
+            -webkit-transition: .4s;
+            transition: .4s;
+
+            &:before {
+                position: absolute;
+                content: "";
+                height: 16px;
+                width: 16px;
+                left: 4px;
+                bottom: 4px;
+                background-color: var(--colorBackgroundClipboardDark);
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+        }
+
+        input:checked + .slider {
+            background-color: var(--colorBackgroundExempleDark);
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 2px var(--colorBackgroundExempleDark);
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(25px);
+            -ms-transform: translateX(25px);
+            transform: translateX(25px);
+        }
+
+        .round {
+            border-radius: 10px;
+
+            &:before {
+                border-radius: 50%;
+            }
+        }
+    }
+`;
+
+export const AreaInputRange = styled.div`
+    width: 100%;
+    padding: 20px 15px;
     display: flex;
     flex-flow: row nowrap;
     justify-content: center;
     align-items: center;
 `;
 
-export const Button = styled.button`
-    height: 100%;
-    padding: 0 10px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: var(--colorButtonPrimaryDark);
-    color: var(--colorFontPrimaryDark);
-    border: none;
-    text-decoration: none;
-    display: inline-block;
-    cursor: pointer;
-`;
-
-export const Input = styled.input`
-    width: 100%;
-    height: 100%;
-    background-color: var(--colorBackgroundInputDark);
-    color: var(--colorFontSecundaryDark);
-    font-size: 1.8rem;
-    letter-spacing: 0.06rem;
-    padding: 10px;
-    border: none;
-    border-radius: 0;
-    display: block;
-    outline: 0;
-`;
-
-export const ContainerInput = styled.div`
-    position: relative;
+export const AreaInputValues = styled.div`
     width: 100%;
     max-width: 450px;
-    height: 45px;
-    margin: 15px 0;
+    margin: 10px 0;
+    padding: 10px;
+    border: 2px solid var(--colorBorderClipboardDark);
+`;
+
+export const ContainerInputValues = styled.div`
+    width: 100%;
+    padding: 10px 0;
     display: flex;
-    flex-flow: row nowrap;
-
-    ${Input} {
-        border: ${props => props.error ? '1px solid var(--colorBorderErrorDark)' : '1px solid var(--colorBorderNormalDark)' };
-        transform: border 0.6s;
-    }
-
-    label {
-        position: absolute;
-        color: ${props => props.error ? 'var(--colorBorderErrorDark)' : 'transparent' };
-        font-size: 13px;
-        font-weight: normal;
-        pointer-events: none;       
-        left: 5px;
-        top: ${props => props.error ? '-20px' : '-10px' };
-        transition: 200ms ease all;
-        cursor: default;
-    }
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
 `;
