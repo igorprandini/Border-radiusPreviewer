@@ -60,7 +60,8 @@ export const Section = styled.section`
         cursor: default;
 
         @media (max-width: 768px) {
-            font-size: 2.5rem;
+            font-size: 1.9rem;
+            font-weight: 200;
         }
     }
 
@@ -98,6 +99,16 @@ export const ContainerExemple = styled.div`
         width: 141px;
         height: 140px;
         background-color: var(--colorBackgroundExempleDark);
+    }
+
+    @media (max-width: 768px) {
+        width: 141px;
+        height: 140px;
+
+        ${ObjectExemple} {
+            width: 121px;
+            height: 120px;
+        }
     }
 `;
 
@@ -220,7 +231,7 @@ export const AreaInputValues = styled.div`
     width: 100%;
     max-width: 450px;
     margin: 10px 0;
-    padding: 10px;
+    padding: 5px;
     border: 2px solid var(--colorBorderClipboardDark);
 `;
 

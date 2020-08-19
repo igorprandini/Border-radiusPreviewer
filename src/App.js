@@ -44,7 +44,7 @@ function App() {
     <div className="App">
       <Section>
         <h1>Border-radius</h1>
-        <p>Previwer</p>
+        <p>Previewer</p>
         <ContainerExemple>
           <ObjectExemple radius={viwerRadius} />
         </ContainerExemple>
