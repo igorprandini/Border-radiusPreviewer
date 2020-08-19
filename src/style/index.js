@@ -230,8 +230,8 @@ export const AreaSwitch = styled.div`
 export const AreaInputValues = styled.div`
     width: 100%;
     max-width: 450px;
-    margin: 10px 0;
-    padding: 5px;
+    margin: 2px 0;
+    padding: 5px 13px;
     border: 2px solid var(--colorBorderClipboardDark);
 `;
 
@@ -239,7 +239,7 @@ export const ContainerInputValues = styled.div`
     width: 100%;
     padding: 10px 0;
     display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
+    flex-flow: column nowrap;
+    justify-content: center;
     align-items: center;
 `;

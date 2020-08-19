@@ -1,27 +1,33 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Section, ContainerExemple, ObjectExemple, Clipboard, ContainerInputValues, AreaSwitch, Switch, AreaInputValues } from './style';
 import Slider from 'react-rangeslider';
-import 'react-rangeslider/lib/index.css'
+import 'react-rangeslider/lib/index.css';
 
 function App() {
-  const [radiusTopLeft, setRadiusTopLeft] = useState(0);
-  const [radiusTopRight, setRadiusTopRight] = useState(0);
-  const [radiusButtomRight, setRadiusButtomRight] = useState(0);
-  const [radiusButtomLeft, setRadiusButtomLeft] = useState(0);
+  const [valueRadius, setValueRadius] = useState({
+    topLeftRadius: 0,
+    topRightRadius: 0,
+    buttomRightRadius: 0,
+    buttomLeftRadius: 0
+  });
   const [complexSelected, setComplexSelected] = useState(false);
   const [viwerRadius, setViwerRadius] = useState(`0% 0% 0% 0%`);
 
   const setViwerSelected = useCallback(() => {
     if(!!complexSelected){
-      setRadiusTopLeft(100);
-      setRadiusTopRight(0);
-      setRadiusButtomRight(100);
-      setRadiusButtomLeft(0);
+      setValueRadius({
+        topLeftRadius: 100,
+        topRightRadius: 0,
+        buttomRightRadius: 100,
+        buttomLeftRadius: 0
+      });
     } else {
-      setRadiusTopLeft(0);
-      setRadiusTopRight(0);
-      setRadiusButtomRight(0);
-      setRadiusButtomLeft(0);
+      setValueRadius({
+        topLeftRadius: 0,
+        topRightRadius: 0,
+        buttomRightRadius: 0,
+        buttomLeftRadius: 0
+      });
     }
   }, [complexSelected]);
   
@@ -30,16 +36,17 @@ function App() {
   }, [setViwerSelected]);
 
   useEffect(() => {
+    const {topLeftRadius, topRightRadius, buttomRightRadius, buttomLeftRadius} = valueRadius;
     if(!!complexSelected){
       setViwerRadius(`
-        ${100 - radiusTopLeft}% ${radiusTopLeft}% ${100 - radiusButtomRight}% ${radiusButtomRight}% / 
-        ${100 - radiusTopRight}% ${radiusTopRight}% ${100 - radiusButtomLeft}% ${radiusButtomLeft}%
+        ${100 - topLeftRadius}% ${topLeftRadius}% ${100 - buttomRightRadius}% ${buttomRightRadius}% / 
+        ${100 - topRightRadius}% ${topRightRadius}% ${100 - buttomLeftRadius}% ${buttomLeftRadius}%
       `);
     } else {
-      setViwerRadius(`${radiusTopLeft}% ${radiusTopRight}% ${radiusButtomRight}% ${radiusButtomLeft}%`);
+      setViwerRadius(`${topLeftRadius}% ${topRightRadius}% ${buttomRightRadius}% ${buttomLeftRadius}%`);
     }
-  }, [complexSelected, radiusTopLeft, radiusTopRight, radiusButtomLeft, radiusButtomRight]);
-  
+  }, [complexSelected, valueRadius]);
+
   return (
     <div className="App">
       <Section>
@@ -55,19 +62,19 @@ function App() {
           <span>border-radius: <label>{`${viwerRadius}`}</label>;</span>
         </Clipboard>
         <ContainerInputValues>
-        <AreaSwitch >
-            <span>Simple</span>
-            <Switch>
-                <input type="checkbox" value={complexSelected} onChange={e => setComplexSelected(!complexSelected)} checked={complexSelected} />
-                <span className="slider round" />
-            </Switch>
-            <span>Complex</span>
-        </AreaSwitch>
+          <AreaSwitch >
+              <span>Simple</span>
+              <Switch>
+                  <input type="checkbox" value={complexSelected} onChange={e => setComplexSelected(!complexSelected)} checked={complexSelected} />
+                  <span className="slider round" />
+              </Switch>
+              <span>Complex</span>
+          </AreaSwitch>
           <AreaInputValues>
-            <Slider value={radiusTopLeft} min={0} max={100} onChange={value => setRadiusTopLeft(value)} />
-            <Slider value={radiusTopRight} min={0} max={100} onChange={value => setRadiusTopRight(value)} />
-            <Slider value={radiusButtomRight} min={0} max={100} onChange={value => setRadiusButtomRight(value)} />
-            <Slider value={radiusButtomLeft} min={0} max={100} onChange={value => setRadiusButtomLeft(value)} />
+            <Slider value={valueRadius.topLeftRadius} onChange={value => setValueRadius({...valueRadius, topLeftRadius: value})} />
+            <Slider value={valueRadius.topRightRadius} onChange={value => setValueRadius({...valueRadius, topRightRadius: value})} />
+            <Slider value={valueRadius.buttomRightRadius} onChange={value => setValueRadius({...valueRadius, buttomRightRadius: value})} />
+            <Slider value={valueRadius.buttomLeftRadius} onChange={value => setValueRadius({...valueRadius, buttomLeftRadius: value})} />
           </AreaInputValues>
         </ContainerInputValues>
       </Section>
